@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwh2nwfwcjcf3"]
+
+[ext_resource type="Script" path="res://game_scene.gd" id="1_cyxg2"]
+[ext_resource type="PackedScene" uid="uid://bwp13gle357sf" path="res://player.tscn" id="1_w8606"]
+[ext_resource type="Texture2D" uid="uid://d3bq7jb3h7c55" path="res://crosshair.svg" id="2_fax6p"]
+[ext_resource type="Texture2D" uid="uid://841kpf7wnrr4" path="res://icon.svg" id="3_4kmrq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8cb22"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jj4kn"]
+albedo_texture = ExtResource("3_4kmrq")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nfn7o"]
+
+[node name="GameScene" type="Node3D"]
+script = ExtResource("1_cyxg2")
+
+[node name="Player" parent="." instance=ExtResource("1_w8606")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)
+mesh = SubResource("PlaneMesh_8cb22")
+surface_material_override/0 = SubResource("StandardMaterial3D_jj4kn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.766044, 0.321394, -0.55667, 0, 0.866025, 0.5, 0.642788, -0.383022, 0.663414, 0, 3, 0)
+shadow_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fax6p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+mesh = SubResource("BoxMesh_nfn7o")
